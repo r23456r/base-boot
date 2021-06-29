@@ -20,7 +20,10 @@ spring:
         min-idle: 0
 mybatis:
   type-aliases-package: com.bc.domain
-  #  debug 预编译参数详情
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+cmd:
+  corePoolSize: 4
+  keepAliveSeconds: 15
+  maximumPoolSize: 8
+  taskQueueMaxStorage: 20
+  threadname: cmd-executor
 
