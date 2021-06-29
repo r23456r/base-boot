@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+
+<generatorConfiguration>
+
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!-- 分页 -->
+
+        <!--序列化-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--重写toString()-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <commentGenerator>
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/>
+
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ca?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;serverTimezone=GMT%2B8"
+                        userId="root" password="Test@123"/>
+
+        <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+        <javaModelGenerator targetPackage="com.bc.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!--对应的xml mapper文件  -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 对应的dao接口 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.bc.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="tb_key" domainObjectName="KeyDomain"
+               mapperName="KeyMapper"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+    </context>
+</generatorConfiguration>
