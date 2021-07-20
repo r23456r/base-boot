@@ -46,7 +46,7 @@ jasypt:
 ############################# loging #############################
 logging:
   config: classpath:logback-spring.xml
-  path: logs_platform
+  path: log
   level:
     root: info
   settings:

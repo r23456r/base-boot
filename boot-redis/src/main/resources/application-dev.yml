@@ -1,0 +1,84 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+#mysql
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 30
+      auto-commit: true
+      idle-timeout: 3000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 3000
+      driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.21.203:3306/KMS_test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: bochtec@2021
+  redis:
+    cluster:
+      nodes: 192.168.21.203:7000,192.168.21.203:7001,192.168.21.203:7002,192.168.21.203:7003,192.168.21.203:7004,192.168.21.203:7005
+      database: 1
+      jedis:
+        pool:
+          min-idle: 10
+          max-idle: 50
+          max-active: 200
+          max-wait: 3000ms
+      redisson:
+        config: |
+          clusterServersConfig:
+            idleConnectionTimeout: 10000
+            connectTimeout: 10000
+            timeout: 3000
+            retryAttempts: 3
+            retryInterval: 1500
+            failedSlaveReconnectionInterval: 3000
+            failedSlaveCheckInterval: 60000
+            password: null
+            subscriptionsPerConnection: 5
+            clientName: null
+            loadBalancer: !<org.redisson.connection.balancer.RoundRobinLoadBalancer> {}
+            subscriptionConnectionMinimumIdleSize: 1
+            subscriptionConnectionPoolSize: 50
+            slaveConnectionMinimumIdleSize: 24
+            slaveConnectionPoolSize: 64
+            masterConnectionMinimumIdleSize: 24
+            masterConnectionPoolSize: 64
+            readMode: "SLAVE"
+            subscriptionMode: "SLAVE"
+            nodeAddresses:
+            - "redis://192.168.21.203:7000"
+            - "redis://192.168.21.203:7001"
+            - "redis://192.168.21.203:7002"
+            - "redis://192.168.21.203:7003"
+            - "redis://192.168.21.203:7004"
+            - "redis://192.168.21.203:7005"
+            scanInterval: 1000
+            pingConnectionInterval: 0
+            keepAlive: false
+            tcpNoDelay: false
+          threads: 16
+          nettyThreads: 32
+          codec: !<org.redisson.codec.MarshallingCodec> {}
+          transportMode: "NIO"
+mybatis:
+  type-aliases-package: com.bc.domain
+cmd:
+  corePoolSize: 4
+  keepAliveSeconds: 15
+  maximumPoolSize: 8
+  taskQueueMaxStorage: 20
+  threadname: cmd-executor
+http:
+  encoding:
+    charset: UTF-8
+    enabled: true
+    force: true
+  jackson:
+    #    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: true

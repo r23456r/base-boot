@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: dev
+jasypt:
+  encryptor:
+    password: platform
+
+############################# loging #############################
+logging:
+  config: classpath:logback-spring.xml
+  path: log
+  level:
+    root: info
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#swagger
+oauth:
+  shiro:
+    tokenExpireTime: 43200000
+    refreshTokenExpireTime: 200000
+    shiroCacheExpireTime: 300000
+
+
+
+
+
